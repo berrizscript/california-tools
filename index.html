@@ -1,0 +1,384 @@
+<html><head><base href="." />
+<title>CaliTools - Creative Tools & Resources</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  body {
+    background: #fff;
+    color: #1d1d1f;
+    line-height: 1.5;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    width: 100%;
+    padding: 15px 0;
+    z-index: 100;
+  }
+
+  .nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 40px;
+  }
+
+  .nav a {
+    color: #1d1d1f;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  .nav a:hover {
+    color: #2997ff;
+  }
+
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(180deg, #fbfbfd 0%, #fff 100%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 28px;
+    color: #86868b;
+    margin-bottom: 30px;
+  }
+
+  .cta {
+    font-size: 21px;
+    color: #2997ff;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .cta:hover {
+    opacity: 0.7;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+  }
+
+  .content-card {
+    background: #f5f5f7;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .content-card:hover {
+    transform: scale(1.02);
+  }
+
+  .content-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+
+  .content-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .content-card p {
+    color: #86868b;
+    font-size: 16px;
+  }
+
+  .about-section {
+    padding: 100px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+  }
+
+  .about-section h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .about-section p {
+    font-size: 20px;
+    color: #86868b;
+    margin-bottom: 20px;
+  }
+
+  .tools-page {
+    display: none;
+    padding: 120px 20px 60px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tools-page.active {
+    display: block;
+  }
+
+  .tool-item {
+    background: #f5f5f7;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .code-block {
+    background: #434343;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: monospace;
+    margin: 20px 0;
+    white-space: pre-wrap;
+    position: relative;
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: opacity 0.2s;
+  }
+
+  .copy-button:hover {
+    opacity: 0.7;
+  }
+
+  .copy-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+
+  .copy-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: slideUpFade 2s ease-in-out;
+    z-index: 1000;
+  }
+
+  @keyframes slideUpFade {
+    0% { 
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+    15% { 
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    85% { 
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    100% { 
+      opacity: 0;
+      transform: translate(-50%, -10px);
+    }
+  }
+
+  .main-content {
+    display: block;
+  }
+
+  .main-content.hidden {
+    display: none;
+  }
+
+  .interface-page {
+    display: none;
+    padding: 120px 20px 60px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .interface-page.active {
+    display: block;
+  }
+
+  .interface-page h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .interface-page p {
+    font-size: 20px;
+    color: #86868b;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <ul>
+      <li><a id="home-link">Home</a></li>
+      <li><a id="about-link">About</a></li>
+      <li><a id="tools-link">Tools</a></li>
+      <li><a id="interface-link">Interfaces</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+    <section class="hero">
+      <h1>CaliTools</h1>
+      <p>cool javascript tools for you! (have fun :P).</p>
+      <a href="https://calitools.com/tools" class="cta">start exploring :0 ></a>
+    </section>
+
+    <section class="about-section" id="about-section">
+      <h2>lazy about section</h2>
+      <p>welcome lol. I make js scriptz that you can enter to do many things! ex. i might make a playable game window that shows up on webpage! (doesnt ruin history). best part: CHROMEBOOK COMPATIBLE!</p>
+    </section>
+
+    <section class="content-grid">
+      <div class="content-card">
+        <img src="/a/a41f7c3a-fef0-4752-ad0c-2632f8c8252d" class="content-icon" alt="About icon">
+        <h3>About</h3>
+        <p>what to do in website roflmao.</p>
+      </div>
+
+      <div class="content-card">
+        <img src="/a/8903ae93-b36b-4c0e-87ad-ac19f9dcd530" class="content-icon" alt="Tools icon">
+        <h3>Tools</h3>
+        <p>start the fun!1!!1</p>
+      </div>
+
+      <div class="content-card">
+        <img src="/a/b51bd6a6-7f88-44e0-890b-2a3faabb879b" class="content-icon" alt="VistaPanel icon">
+        <h3>Interfaces</h3>
+        <p>helpful and fun free interfaces. (Become tester for Pro and + uis.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="tools-page">
+    <h2>Example</h2>
+    <div class="tool-item">
+      <div class="code-block">
+        console.log("Hello, World!");
+        <button class="copy-button" aria-label="Copy code">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+          </svg>
+        </button>
+      </div>
+      <p>This is just a test! Expect more.</p>
+    </div>
+  </div>
+
+  <div class="interface-page">
+    <h2>iBuilder</h2>
+    <p>iBuilder is wip rn, but you will be able to test it soon! iBuilder comes with many ways to tweak various things on the webpage with just a simple click! This especially doesn't ruin history!</p>
+  </div>
+
+  <div class="copy-notification">Copied to clipboard</div>
+
+  <script>
+    document.getElementById('home-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.main-content').classList.remove('hidden');
+      document.querySelector('.tools-page').classList.remove('active');
+      document.querySelector('.interface-page').classList.remove('active');
+    });
+
+    document.getElementById('about-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.main-content').classList.remove('hidden');
+      document.querySelector('.tools-page').classList.remove('active');
+      document.querySelector('.interface-page').classList.remove('active');
+      setTimeout(() => {
+        document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    });
+
+    document.getElementById('tools-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.main-content').classList.add('hidden');
+      document.querySelector('.tools-page').classList.add('active');
+      document.querySelector('.interface-page').classList.remove('active');
+    });
+
+    document.getElementById('interface-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.main-content').classList.add('hidden');
+      document.querySelector('.tools-page').classList.remove('active');
+      document.querySelector('.interface-page').classList.add('active');
+    });
+
+    document.querySelector('.copy-button').addEventListener('click', async function() {
+      const codeBlock = document.querySelector('.code-block');
+      const code = codeBlock.textContent.trim();
+      
+      try {
+        await navigator.clipboard.writeText(code);
+        const notification = document.querySelector('.copy-notification');
+        notification.style.display = 'block';
+        
+        notification.addEventListener('animationend', () => {
+          notification.style.display = 'none';
+        }, {once: true});
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    });
+
+    document.querySelectorAll('a[href^="https"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log('Navigating to:', this.getAttribute('href'));
+      });
+    });
+  </script>
+</body>
+</html>
