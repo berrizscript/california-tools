@@ -1,5 +1,5 @@
 <html><head><base href="." />
-<title>CaliTools - Creative Tools & Resources</title>
+<title>CaliTools</title>
 <style>
   * {
     margin: 0;
@@ -142,42 +142,92 @@
 
   .tools-page {
     display: none;
-    padding: 120px 20px 60px;
-    max-width: 800px;
+    padding: 120px 40px 60px;
+    max-width: 980px; /* Wider max-width for Apple-like look */
     margin: 0 auto;
+    background: #fbfbfd;
   }
 
   .tools-page.active {
     display: block;
   }
 
+  .tools-page h2 {
+    font-size: 48px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, #1d1d1f, #434343);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .tool-item {
-    background: #f5f5f7;
-    border-radius: 18px;
-    padding: 30px;
-    margin-bottom: 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tool-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .tool-item p {
+    font-size: 17px;
+    color: #86868b;
+    line-height: 1.5;
+    margin-top: 20px;
+    font-weight: 400;
+    text-align: center;
   }
 
   .code-block {
-    background: #434343;
+    background: #1d1d1f;
     color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    font-family: monospace;
+    padding: 25px;
+    border-radius: 12px;
+    font-family: 'SF Mono', monospace;
     margin: 20px 0;
     white-space: pre-wrap;
     position: relative;
+    height: 100px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .code-block::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .code-block::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 4px;
+  }
+
+  .code-block::-webkit-scrollbar-thumb {
+    background: #515151;
+    border-radius: 4px;
+  }
+
+  .code-block::-webkit-scrollbar-thumb:hover {
+    background: #666;
   }
 
   .copy-button {
     position: absolute;
     top: 10px;
-    right: 10px;
-    background: none;
+    right: -40px;
     border: none;
     cursor: pointer;
-    padding: 5px;
-    transition: opacity 0.2s;
+    padding: 8px;
+    transition: opacity 0.2s ease;
+    background: none;
   }
 
   .copy-button:hover {
@@ -185,9 +235,9 @@
   }
 
   .copy-button svg {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
+    width: 18px;
+    height: 18px;
+    fill: #1d1d1f;
   }
 
   .copy-notification {
@@ -303,23 +353,35 @@
   </div>
 
   <div class="tools-page">
-    <h2>Example</h2>
+    <h2>Custom Highlight</h2>
     <div class="tool-item">
-      <div class="code-block">
-        console.log("Hello, World!");
+      <div style="position: relative;">
+        <div class="code-block">(() => {
+    const color = prompt('Enter a hex color code for the highlight (e.g., #1DB954):', '#1DB954');
+    if (color && /^#[0-9A-Fa-f]{6}$/.test(color)) {
+        const style = document.createElement('style');
+        style.textContent = `::selection { background-color: ${color} !important; color: white !important; }`;
+        document.head.appendChild(style);
+    } else {
+        alert('Invalid hex color code! Using default green.');
+        const style = document.createElement('style');
+        style.textContent = '::selection { background-color: #1DB954 !important; color: white !important; }';
+        document.head.appendChild(style);
+    }
+})();</div>
         <button class="copy-button" aria-label="Copy code">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
           </svg>
         </button>
       </div>
-      <p>This is just a test! Expect more.</p>
+      <p>A cool tool to change text highlight color</p>
     </div>
   </div>
 
   <div class="interface-page">
     <h2>iBuilder</h2>
-    <p>iBuilder is wip rn, but you will be able to test it soon! iBuilder comes with many ways to tweak various things on the webpage with just a simple click! This especially doesn't ruin history!</p>
+    <p>iBuilder is wip rn, but you will be able to test it soon! iBuilder comes with many ways to tweak various things on the webpage with just a simple click! This especially doesn't ruin history! iBuilder will include tools from Tools page! Go check that out.</p>
   </div>
 
   <div class="copy-notification">Copied to clipboard</div>
